@@ -6,3 +6,6 @@ def inicio(request):
     return render(request, 'inicio/inicio.html')
     # return HttpResponse('<h1>Bienvenidos a Biblioteca Virtual</h1>')
 
+def agregar_libro(request):
+    
+    return render(request, 'inicio/agregar_libro.html')
