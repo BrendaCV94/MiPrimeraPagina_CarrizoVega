@@ -1,11 +1,27 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .models import Libro
+from .forms import LibroFormulario
 
 def inicio(request):
-    
     return render(request, 'inicio/inicio.html')
-    # return HttpResponse('<h1>Bienvenidos a Biblioteca Virtual</h1>')
 
 def agregar_libro(request):
-    
-    return render(request, 'inicio/agregar_libro.html')
+    if request.method == "POST":
+        form = LibroFormulario(request.POST)
+        if form.is_valid():
+            info = form.cleaned_data
+            libro = Libro(
+                titulo=info['titulo'],
+                autor=info['autor'],
+                año=info['año']
+            )
+            libro.save()
+            return redirect('lista_libros')
+    else:
+        form = LibroFormulario()
+    return render(request, "inicio/agregar_libro.html", {"form": form})
+
+def lista_libros(request):
+    libros = Libro.objects.all()
+    return render(request, "inicio/lista_libros.html", {"libros": libros})
+

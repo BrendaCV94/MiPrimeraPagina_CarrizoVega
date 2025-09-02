@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Libros</title>
+</head>
+<body>
+    <h1>Lista de Libros</h1>
+    <ul>
+        {% for libro in libros %}
+            <li>{{ libro.titulo }} - {{ libro.autor }} ({{ libro.año }})</li>
+        {% empty %}
+            <li>No hay libros cargados aún.</li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="{% url 'agregar_libro' %}">Agregar un nuevo libro</a><br>
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+</body>
+</html>
