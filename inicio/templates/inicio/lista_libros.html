@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Libros</title>
-</head>
-<body>
-    <h1>Lista de Libros</h1>
+{% extends "base.html" %}
+
+{% block title %}Lista de Libros{% endblock %}
+
+{% block content %}
+    <h1>Listado de Libros</h1>
+
     <ul>
         {% for libro in libros %}
-            <li>{{ libro.titulo }} - {{ libro.autor }} ({{ libro.año }})</li>
+            <li>
+                {{ libro.titulo }}
+                <span class="acciones">
+                    <a href="{% url 'Detalle_Libro' libro.id %}">Detalle</a> |
+                    <a href="{% url 'Actualizar_Libro' libro.id %}">Actualizar</a> |
+                    <a href="{% url 'Eliminar_Libro' libro.id %}">Eliminar</a>
+                </span>
+            </li>
         {% empty %}
             <li>No hay libros cargados aún.</li>
         {% endfor %}
     </ul>
-
-    <br>
-    <a href="{% url 'agregar_libro' %}">Agregar un nuevo libro</a><br>
-    <a href="{% url 'inicio' %}">Volver al inicio</a>
-</body>
-</html>
+{% endblock %}

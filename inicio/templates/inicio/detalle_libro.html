@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle del Libro{% endblock %}
+
+{% block content %}
+    <h1>Detalle del Libro</h1>
+
+    <p><strong>Título:</strong> {{ libro.titulo }}</p>
+    <p><strong>Autor:</strong> {{ libro.autor }}</p>
+    <p><strong>Año:</strong> {{ libro.año }}</p>
+
+    <hr>
+    <a href="{% url 'Actualizar_Libro' libro.id %}">Editar</a> | 
+    <a href="{% url 'Eliminar_Libro' libro.id %}">Eliminar</a>
+{% endblock %}

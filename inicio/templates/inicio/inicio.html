@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Biblioteca Virtual</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Inicio - Biblioteca Virtual{% endblock %}
+
+{% block content %}
     <h1>Bienvenidos a la Biblioteca Virtual</h1>
 
     <a href="{% url 'agregar_libro' %}">Agregar un libro</a><br>
-    <a href="{% url 'lista_libros' %}">Ver lista de libros</a>
-</body>
-</html>
+    <a href="{% url 'lista_libros' %}">Ver lista de libros</a><br>
+
+    {% if user.is_authenticated %}
+        <p>Hola, {{ user.username }}</p>
+    {% endif %}
+{% endblock %}
