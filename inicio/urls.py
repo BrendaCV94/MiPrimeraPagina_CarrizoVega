@@ -4,8 +4,8 @@ from inicio.views import (
     agregar_libro,
     lista_libros,
     detalle_libro,
-    ActualizarLibro,
-    EliminarLibro,
+    editar_libro,
+    eliminar_libro,
 )
 
 urlpatterns = [
@@ -13,6 +13,6 @@ urlpatterns = [
     path('libros/agregar/', agregar_libro, name='agregar_libro'),
     path('libros/', lista_libros, name='lista_libros'),
     path('libros/<int:libro_id>/', detalle_libro, name='Detalle_Libro'),
-    path('libros/<int:pk>/editar/', ActualizarLibro.as_view(), name='Actualizar_Libro'),
-    path('libros/<int:pk>/eliminar/', EliminarLibro.as_view(), name='Eliminar_Libro'),
+    path('libros/<int:libro_id>/editar/', editar_libro, name='Actualizar_Libro'),
+    path('libros/<int:libro_id>/eliminar/', eliminar_libro, name='Eliminar_Libro'),
 ]

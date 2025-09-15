@@ -1,44 +1,56 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
-from django.views.generic import UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 from .models import Libro
 from .forms import LibroFormulario
-
 
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
+# Lista de libros
+def lista_libros(request):
+    libros = Libro.objects.all()
+    return render(request, "inicio/lista_libros.html", {"libros": libros})
 
+# Detalle de libro
+def detalle_libro(request, libro_id):
+    libro = get_object_or_404(Libro, id=libro_id)
+    return render(request, "inicio/detalle_libro.html", {"libro": libro})
+
+# Agregar libro (solo logueados)
+@login_required(login_url='iniciar_sesion')
 def agregar_libro(request):
     if request.method == "POST":
         form = LibroFormulario(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lista_libros')
+            messages.success(request, "Libro agregado correctamente.")
+            return redirect("lista_libros")
     else:
         form = LibroFormulario()
     return render(request, "inicio/agregar_libro.html", {"form": form})
 
-
-def lista_libros(request):
-    libros = Libro.objects.all()
-    return render(request, "inicio/lista_libros.html", {"libros": libros})
-
-
-def detalle_libro(request, libro_id):
+# Editar libro (solo logueados)
+@login_required(login_url='iniciar_sesion')
+def editar_libro(request, libro_id):
     libro = get_object_or_404(Libro, id=libro_id)
-    return render(request, "inicio/detalle_libro.html", {"libro": libro})
+    if request.method == "POST":
+        form = LibroFormulario(request.POST, instance=libro)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Libro actualizado.")
+            return redirect("Detalle_Libro", libro_id=libro.id)
+    else:
+        form = LibroFormulario(instance=libro)
+    return render(request, "inicio/editar_libro.html", {"form": form, "libro": libro})
 
-
-class ActualizarLibro(UpdateView):
-    model = Libro
-    form_class = LibroFormulario
-    template_name = "inicio/actualizar_libro.html"
-    success_url = reverse_lazy("lista_libros")
-
-
-class EliminarLibro(DeleteView):
-    model = Libro
-    template_name = "inicio/eliminar_libro.html"
-    success_url = reverse_lazy("lista_libros")
-
+# Eliminar libro (solo logueados)
+@login_required(login_url='iniciar_sesion')
+def eliminar_libro(request, libro_id):
+    libro = get_object_or_404(Libro, id=libro_id)
+    if request.method == "POST":
+        libro.delete()
+        messages.success(request, "Libro eliminado.")
+        return redirect("lista_libros")
+    return render(request, "inicio/eliminar_libro.html", {"libro": libro})

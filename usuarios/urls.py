@@ -1,8 +1,8 @@
 from django.urls import path
-from usuarios.views import iniciar_sesion
-from django.contrib.auth.views import LogoutView
+from . import views
 
 urlpatterns = [
-    path('iniciar-sesion/', iniciar_sesion, name="iniciar_sesion"),
-    path('cerrar-sesion/', LogoutView.as_view(), name="cerrar_sesion"),
+    path("registro/", views.registrar_usuario, name="registro"),
+    path("iniciar-sesion/", views.iniciar_sesion, name="iniciar_sesion"),
+    path("cerrar-sesion/", views.cerrar_sesion, name="cerrar_sesion"),
 ]

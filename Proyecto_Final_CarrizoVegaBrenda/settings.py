@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'MiPrimeraPagina.urls'
+ROOT_URLCONF = 'Proyecto_Final_CarrizoVegaBrenda.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'MiPrimeraPagina.wsgi.application'
+WSGI_APPLICATION = 'Proyecto_Final_CarrizoVegaBrenda.wsgi.application'
 
 
 # Database
