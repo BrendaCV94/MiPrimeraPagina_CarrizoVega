@@ -14,11 +14,11 @@
             <a href="{% url 'lista_libros' %}">Libros</a> |
 
             {% if user.is_authenticated %}
-                Hola, {{ user.username }}
+                Hola, {{ user.username }} |
+                <a href="{% url 'perfil' %}">Perfil</a> |
                 <a href="{% url 'cerrar_sesion' %}">Cerrar sesión</a>
             {% else %}
                 <a href="{% url 'iniciar_sesion' %}">Iniciar sesión</a> |
-                <!-- Arreglado: antes decía 'registro_usuario' -->
                 <a href="{% url 'registro' %}">Registrarse</a>
             {% endif %}
         </nav>
