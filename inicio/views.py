@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 from .models import Libro
 from .forms import LibroFormulario
 
@@ -54,3 +53,7 @@ def eliminar_libro(request, libro_id):
         messages.success(request, "Libro eliminado.")
         return redirect("lista_libros")
     return render(request, "inicio/eliminar_libro.html", {"libro": libro})
+
+# Nueva vista
+def acerca_de_mi(request):
+    return render(request, "inicio/acerca_de_mi.html")

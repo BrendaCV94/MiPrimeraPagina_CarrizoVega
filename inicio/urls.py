@@ -6,6 +6,7 @@ from inicio.views import (
     detalle_libro,
     editar_libro,
     eliminar_libro,
+    acerca_de_mi,
 )
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path('libros/<int:libro_id>/', detalle_libro, name='Detalle_Libro'),
     path('libros/<int:libro_id>/editar/', editar_libro, name='Actualizar_Libro'),
     path('libros/<int:libro_id>/eliminar/', eliminar_libro, name='Eliminar_Libro'),
+    path('acerca-de-mi/', acerca_de_mi, name='acerca_de_mi'),
 ]
