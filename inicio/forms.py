@@ -4,4 +4,5 @@ from .models import Libro
 class LibroFormulario(forms.ModelForm):
     class Meta:
         model = Libro
-        fields = ['titulo', 'autor', 'año']
+        fields = ['titulo', 'autor', 'año', 'imagen']
+        imagen = forms.ImageField(required=False)

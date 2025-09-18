@@ -9,6 +9,12 @@
     <p><strong>Autor:</strong> {{ libro.autor }}</p>
     <p><strong>Año:</strong> {{ libro.año }}</p>
 
+    {% if libro.imagen %}
+        <p><strong>Imagen:</strong></p>
+        <img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}" 
+             style="max-width:200px; border:1px solid #ccc; border-radius:5px;">
+    {% endif %}
+
     <hr>
     <a href="{% url 'Actualizar_Libro' libro.id %}">Editar</a> | 
     <a href="{% url 'Eliminar_Libro' libro.id %}">Eliminar</a>

@@ -11,6 +11,8 @@ class Libro(models.Model):
             MaxValueValidator(datetime.date.today().year)
         ]
     )
+    imagen = models.ImageField(upload_to='libros', null=True, blank=True) 
 
     def __str__(self):
         return f"{self.titulo} - {self.autor} ({self.año})"
+

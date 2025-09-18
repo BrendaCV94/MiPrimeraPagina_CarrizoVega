@@ -21,7 +21,7 @@ def detalle_libro(request, libro_id):
 @login_required(login_url='iniciar_sesion')
 def agregar_libro(request):
     if request.method == "POST":
-        form = LibroFormulario(request.POST)
+        form = LibroFormulario(request.POST, request.FILES)  # 👈 importante para la imagen
         if form.is_valid():
             form.save()
             messages.success(request, "Libro agregado correctamente.")
@@ -35,7 +35,7 @@ def agregar_libro(request):
 def editar_libro(request, libro_id):
     libro = get_object_or_404(Libro, id=libro_id)
     if request.method == "POST":
-        form = LibroFormulario(request.POST, instance=libro)
+        form = LibroFormulario(request.POST, request.FILES, instance=libro)  # 👈 incluye request.FILES
         if form.is_valid():
             form.save()
             messages.success(request, "Libro actualizado.")
