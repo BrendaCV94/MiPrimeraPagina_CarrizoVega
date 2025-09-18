@@ -5,9 +5,22 @@
 {% block content %}
     <h1>Editar mi Perfil</h1>
 
-    <form method="post">
+    <!-- Mostrar avatar si existe -->
+    {% if datos_extra.avatar %}
+        <p><strong>Avatar actual:</strong></p>
+        <img src="{{ datos_extra.avatar.url }}" alt="Avatar" style="max-width:120px; border-radius:50%; border:1px solid #ccc;">
+    {% else %}
+        <p><em>No tienes un avatar cargado.</em></p>
+    {% endif %}
+
+    <!-- Formulario -->
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+        
+        <p><label for="id_avatar">Actualizar avatar:</label>
+        <input type="file" name="avatar" id="id_avatar"></p>
+
         <button type="submit">Guardar cambios</button>
     </form>
 
@@ -17,3 +30,4 @@
     <hr>
     <a href="{% url 'inicio' %}">Volver al inicio</a>
 {% endblock %}
+
